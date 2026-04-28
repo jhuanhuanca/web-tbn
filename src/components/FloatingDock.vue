@@ -78,7 +78,8 @@
     <!-- Main FAB -->
     <button
       type="button"
-      class="group relative grid size-14 place-items-center rounded-[1.4rem] bg-tbn-dark text-white shadow-soft ring-1 ring-tbn-light/20 transition hover:-translate-y-1 hover:shadow-xl active:translate-y-0"
+      class="group relative grid size-14 place-items-center rounded-[1.4rem] text-white shadow-soft ring-1 ring-white/20 transition hover:-translate-y-1 hover:brightness-95 hover:shadow-xl active:translate-y-0"
+      style="background-color:#54b144;"
       @click="toggle"
       aria-label="Acciones rápidas"
     >
@@ -164,7 +165,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
 }
 
 .dock-pulse {
-  background: radial-gradient(circle at 30% 20%, rgba(84, 177, 68, 0.45), transparent 55%);
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.35), transparent 60%);
   filter: blur(10px);
   opacity: 0;
   transition: opacity 220ms ease;

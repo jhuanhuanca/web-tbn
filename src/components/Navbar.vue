@@ -12,7 +12,13 @@
         <div
           class="grid size-9 place-items-center rounded-xl bg-white/10 text-white shadow-soft ring-1 ring-white/10 transition-all duration-300 group-hover:-translate-y-1"
         >
-          <span class="text-sm font-semibold tracking-wide">TBN</span>
+          <img
+            :src="tbnLogo"
+            alt="TBN Living"
+            class="h-7 w-7 object-contain"
+            loading="eager"
+            decoding="async"
+          />
         </div>
         <div class="leading-tight">
           <div class="text-sm font-extrabold text-white">TBN Living</div>
@@ -83,19 +89,142 @@
           </div>
         </div>
 
+        <!-- Inicio -->
         <RouterLink
-          v-for="item in nav"
-          :key="item.to"
-          :to="item.to"
+          to="/"
           class="relative rounded-xl px-3 py-2 text-sm font-extrabold transition-all duration-300"
-          :class="isActive(item.to)
-            ? 'text-tbn-light'
-            : 'text-white/90 hover:bg-white/10'"
+          :class="isActive('/') ? 'text-tbn-light' : 'text-white/90 hover:bg-white/10'"
         >
-          {{ item.label }}
-          <span
-            class="absolute left-2 right-2 -bottom-1 h-[2px] rounded-full bg-tbn-light transition-all duration-300"
-            :class="isActive(item.to) ? 'opacity-100' : 'opacity-0'"
+          Inicio
+          <span class="absolute left-2 right-2 -bottom-1 h-[2px] rounded-full bg-tbn-light transition-all duration-300"
+            :class="isActive('/') ? 'opacity-100' : 'opacity-0'"
+          ></span>
+        </RouterLink>
+
+        <!-- Productos -->
+        <RouterLink
+          to="/productos"
+          class="relative rounded-xl px-3 py-2 text-sm font-extrabold transition-all duration-300"
+          :class="isActive('/productos') ? 'text-tbn-light' : 'text-white/90 hover:bg-white/10'"
+        >
+          Productos
+          <span class="absolute left-2 right-2 -bottom-1 h-[2px] rounded-full bg-tbn-light transition-all duration-300"
+            :class="isActive('/productos') ? 'opacity-100' : 'opacity-0'"
+          ></span>
+        </RouterLink>
+
+        <!-- Negocio (submenu) -->
+        <div class="relative" @mouseenter="openMenu = 'negocio'" @mouseleave="openMenu = null">
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-extrabold transition-all duration-300"
+            :class="openMenu === 'negocio' ? 'text-tbn-light bg-white/10' : 'text-white/90 hover:bg-white/10'"
+          >
+            Negocio
+            <Icon name="chevronDown" class="size-4 opacity-80" />
+          </button>
+
+          <div
+            v-show="openMenu === 'negocio'"
+            class="absolute left-0 top-[calc(100%+10px)] w-[28rem] overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-black/10"
+          >
+            <div class="grid gap-3 p-4 sm:grid-cols-2">
+              <RouterLink to="/negocio" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="rocket" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Negocio</span>
+                  <span class="mm-desc">Visión, estrategia y crecimiento.</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/negocio/crear-mi-negocio" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="sparkles" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Crear mi negocio</span>
+                  <span class="mm-desc">Onboarding y pasos iniciales.</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/negocio/testimonios-distribuidores" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="trophy" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Testimonios de distribuidores</span>
+                  <span class="mm-desc">Historias reales (demo).</span>
+                </span>
+              </RouterLink>
+              <a href="#recursos" class="mm-item" @click.prevent="goHash('#recursos'); openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="book" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Recursos</span>
+                  <span class="mm-desc">Capacitación y herramientas.</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recursos (submenu) -->
+        <div class="relative" @mouseenter="openMenu = 'recursos'" @mouseleave="openMenu = null">
+          <button
+            type="button"
+            class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-extrabold transition-all duration-300"
+            :class="openMenu === 'recursos' ? 'text-tbn-light bg-white/10' : 'text-white/90 hover:bg-white/10'"
+          >
+            Recursos
+            <Icon name="chevronDown" class="size-4 opacity-80" />
+          </button>
+
+          <div
+            v-show="openMenu === 'recursos'"
+            class="absolute left-0 top-[calc(100%+10px)] w-[32rem] overflow-hidden rounded-3xl bg-white shadow-2xl ring-1 ring-black/10"
+          >
+            <div class="grid gap-3 p-4 sm:grid-cols-2">
+              <RouterLink to="/recursos" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="book" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Recursos</span>
+                  <span class="mm-desc">Capacitación y comunidad.</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/recursos/fortalecer-mi-negocio" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="sparkles" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Fortalecer mi negocio</span>
+                  <span class="mm-desc">Hábitos y métricas.</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/recursos/eventos" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="chevronDown" class="size-5 rotate-[-90deg]" /></span>
+                <span>
+                  <span class="mm-title">Eventos</span>
+                  <span class="mm-desc">Calendario (demo).</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/recursos/reconocimientos" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="trophy" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Reconocimientos</span>
+                  <span class="mm-desc">Rankings (demo).</span>
+                </span>
+              </RouterLink>
+              <RouterLink to="/recursos/campanas-e-incentivos" class="mm-item" @click="openMenu = null">
+                <span class="mm-ico text-tbn-dark/80"><Icon name="sparkles" class="size-5" /></span>
+                <span>
+                  <span class="mm-title">Campañas e incentivos</span>
+                  <span class="mm-desc">Metas y premios.</span>
+                </span>
+              </RouterLink>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonios -->
+        <RouterLink
+          to="/testimonios"
+          class="relative rounded-xl px-3 py-2 text-sm font-extrabold transition-all duration-300"
+          :class="isActive('/testimonios') ? 'text-tbn-light' : 'text-white/90 hover:bg-white/10'"
+        >
+          Testimonios
+          <span class="absolute left-2 right-2 -bottom-1 h-[2px] rounded-full bg-tbn-light transition-all duration-300"
+            :class="isActive('/testimonios') ? 'opacity-100' : 'opacity-0'"
           ></span>
         </RouterLink>
       </nav>
@@ -147,11 +276,11 @@
 
     <!-- MOBILE MENU -->
     <div
-      class="fixed top-16 left-0 right-0 z-50 bg-tbn-dark border-t border-white/10 transform transition-all duration-300 md:hidden"
+      class="fixed top-16 left-0 right-0 z-[60] border-t border-white/10 transform transition-all duration-300 md:hidden shadow-2xl ring-1 ring-white/10 backdrop-blur-none bg-[rgba(34,45,37,0.98)]"
       :class="mobileOpen ? 'translate-y-0 opacity-100' : '-translate-y-5 opacity-0 pointer-events-none'"
     >
       <div class="mx-auto max-w-7xl px-4 py-4">
-        <div class="grid gap-2">
+        <div class="grid gap-2 max-h-[calc(100dvh-5rem)] overflow-auto pr-1">
           <button
             type="button"
             class="rounded-xl px-3 py-2 text-left text-sm font-extrabold text-white/90 transition hover:bg-white/10"
@@ -194,7 +323,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
     </header>
 
     <LocationModal
@@ -218,6 +347,7 @@ import { useCart } from '../stores/cart'
 import LocationModal from './LocationModal.vue'
 import SearchModal from './SearchModal.vue'
 import Icon from './Icon.vue'
+import tbnLogo from '../assets/img/tbnlogo.png'
 
 const mobileOpen = ref(false)
 const scrollY = ref(0)
@@ -231,15 +361,19 @@ const searchOpen = ref(false)
 
 const location = ref(loadLocation())
 
-const nav = [
+const navMobile = computed(() => [
   { label: 'Inicio', to: '/' },
   { label: 'Productos', to: '/productos' },
   { label: 'Negocio', to: '/negocio' },
+  { label: 'Crear mi negocio', to: '/negocio/crear-mi-negocio' },
+  { label: 'Testimonios de distribuidores', to: '/negocio/testimonios-distribuidores' },
   { label: 'Recursos', to: '/recursos' },
+  { label: 'Fortalecer mi negocio', to: '/recursos/fortalecer-mi-negocio' },
+  { label: 'Eventos', to: '/recursos/eventos' },
+  { label: 'Reconocimientos', to: '/recursos/reconocimientos' },
+  { label: 'Campañas e incentivos', to: '/recursos/campanas-e-incentivos' },
   { label: 'Testimonios', to: '/testimonios' },
-]
-
-const navMobile = computed(() => [...nav])
+])
 
 // detectar ruta activa
 const isActive = (path) => route.path === path
